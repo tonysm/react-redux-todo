@@ -1,20 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {PropTypes} from 'prop-types';
 
-class TodoFilter extends Component {
-    render () {
-        const buttons = this.props.filters.map(filter => (
-            <button disabled={this.props.currentFilter === filter} onClick={() => this.props.onFilterChange(filter)}>
-                {filter.toUpperCase()}
-            </button>
-        ));
-        return (
-            <div>
-                {buttons}
-            </div>
-        );
-    }
-}
+const TodoFilter = ({filters, currentFilter, onFilterChange}) => (
+    <div>
+        {filters.map(filter => <button key={filter} disabled={filter === currentFilter} onClick={() => onFilterChange(filter)} >{filter.toUpperCase()}</button>)}
+    </div>
+)
 
 TodoFilter.propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,

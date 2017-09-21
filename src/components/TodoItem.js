@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {PropTypes} from 'prop-types';
 
-class TodoItem extends Component {
-    render() {
-        const item = this.props.item;
-        const onChecked = () => this.props.onChecked(item);
+const TodoItem = ({item, onChecked}) => (
+    <li>
+        <input type="checkbox" checked={item.done} onChange={() => onChecked(item)} />
+        {item.task}
+    </li>
+)
 
-        return (
-            <li>
-                <input type="checkbox" checked={item.done} onChange={onChecked} />
-                {item.task}
-            </li>
-        );
-    }
-}
 
 TodoItem.propTypes = {
     item: PropTypes.object.isRequired,
