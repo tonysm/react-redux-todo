@@ -1,3 +1,5 @@
+import {TOGGLE_TODO, CHANGE_FILTER} from '../actions/TodoActions';
+
 const DEFAULT_STATE = {
     items: [
         {id: 1, task: 'Get milk', done: false},
@@ -9,15 +11,6 @@ const DEFAULT_STATE = {
         'done'
     ],
     currentFilter: 'all'
-}
-
-export const TOGGLE_TODO = 'TOGGLE_TODO';
-
-export function toggleTodo(todo) {
-    return {
-        type: TOGGLE_TODO,
-        todo,
-    };
 }
 
 const reducer = (state = DEFAULT_STATE, action) => {
@@ -36,6 +29,8 @@ const reducer = (state = DEFAULT_STATE, action) => {
                     })
                 }
             );
+        case CHANGE_FILTER:
+            return Object.assign({}, state, {currentFilter: action.filter})
         default:
             return state;
     }
