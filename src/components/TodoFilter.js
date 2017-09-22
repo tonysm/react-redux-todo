@@ -8,7 +8,6 @@ const TodoFilter = ({filters, currentFilter, onFilterChange}) => (
 )
 
 TodoFilter.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object).isRequired,
     currentFilter: PropTypes.string.isRequired,
     filters: PropTypes.arrayOf(PropTypes.string),
     onFilterChange: PropTypes.func.isRequired

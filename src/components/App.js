@@ -6,34 +6,32 @@ import { connect } from 'react-redux';
 import {toggleTodo, changeFilter} from '../actions/TodoActions';
 
 class App extends Component {
-  filteredTasks () {
-    if (this.props.currentFilter === 'done') {
-      return this.props.items.filter(i => i.done);
-    }
-
-    if (this.props.currentFilter === 'incomplete') {
-      return this.props.items.filter(i => !i.done);
-    }
-
-    return this.props.items;
-  }
-
   render() {
-    const filteredItems = this.filteredTasks();
-
     return (
       <div className="App">
         <h1>TodoApp</h1>
-        <TodoList items={filteredItems} onChecked={this.props.onChecked} />
-        <TodoFilter items={this.props.items} currentFilter={this.props.currentFilter} filters={this.props.filters} onFilterChange={this.props.onFilterChange} />
+        <TodoList items={this.props.items} onChecked={this.props.onChecked} />
+        <TodoFilter currentFilter={this.props.currentFilter} filters={this.props.filters} onFilterChange={this.props.onFilterChange} />
       </div>
     );
   }
 }
 
+const filteredItems = (items, currentFilter) => {
+  if (currentFilter === 'done') {
+    return items.filter(i => i.done);
+  }
+
+  if (currentFilter === 'incomplete') {
+    return items.filter(i => !i.done);
+  }
+
+  return items;
+}
+
 const mapStateToProps = (state) => {
   return {
-    items: state.items,
+    items: filteredItems(state.items, state.currentFilter),
     currentFilter: state.currentFilter,
     filters: state.filters
   };
