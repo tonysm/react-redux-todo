@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import TodoList from './TodoList';
 import TodoFilter from './TodoFilter';
 import { connect } from 'react-redux';
 import {toggleTodo, changeFilter} from '../actions/TodoActions';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>TodoApp</h1>
-        <TodoList items={this.props.items} onChecked={this.props.onChecked} />
-        <TodoFilter currentFilter={this.props.currentFilter} filters={this.props.filters} onFilterChange={this.props.onFilterChange} />
-      </div>
-    );
-  }
-}
+const App = ({items, onChecked, onFilterChange, currentFilter, filters}) => (
+  <div className="App">
+    <h1>TodoApp</h1>
+    <TodoList items={items} onChecked={onChecked} />
+    <TodoFilter currentFilter={currentFilter} filters={filters} onFilterChange={onFilterChange} />
+  </div>
+);
 
 const filteredItems = (items, currentFilter) => {
   if (currentFilter === 'done') {
